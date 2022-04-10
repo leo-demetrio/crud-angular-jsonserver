@@ -1,39 +1,12 @@
 {
   "productList": [
     {
-      "productName": "Maçã",
-      "category": "fruits",
-      "freshness": "",
-      "price": 1,
-      "comment": "maçã fresca",
-      "date": "",
-      "id": 1
-    },
-    {
-      "productName": "tttt",
+      "productName": "ddddd",
       "category": "vegetables",
-      "freshness": "",
-      "price": -1,
-      "comment": "ggg",
-      "date": "",
-      "id": 2
-    },
-    {
-      "productName": "Maçã",
-      "category": "vegetables",
-      "freshness": "Second hand",
+      "freshness": "Brand new",
       "price": 1,
       "comment": "d",
       "date": "2022-04-13T03:00:00.000Z",
-      "id": 3
-    },
-    {
-      "productName": "d",
-      "category": "vegetables",
-      "freshness": "Brand new",
-      "price": -1,
-      "comment": "d",
-      "date": "2022-04-12T03:00:00.000Z",
       "id": 4
     }
   ],

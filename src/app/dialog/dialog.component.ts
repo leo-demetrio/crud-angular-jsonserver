@@ -12,6 +12,7 @@ export class DialogComponent implements OnInit {
 
   freshnessList = ['Brand new', 'Second hand', 'RefurBished'];
   productForm !: FormGroup;
+  actionBtn : string = "save";
   constructor(    
     @Inject(MAT_DIALOG_DATA) public editData : any,
     private formBuilder : FormBuilder,
@@ -28,20 +29,44 @@ export class DialogComponent implements OnInit {
       comment : ['', Validators.required],
       date : ['', Validators.required]
     });
-    console.log(this.editData)
+    if(this.editData){
+      this.actionBtn = "update";
+      this.productForm.controls['productName'].setValue(this.editData.productName);
+      this.productForm.controls['category'].setValue(this.editData.category);
+      this.productForm.controls['freshness'].setValue(this.editData.freshness);
+      this.productForm.controls['price'].setValue(this.editData.price);
+      this.productForm.controls['comment'].setValue(this.editData.comment);
+      this.productForm.controls['date'].setValue(this.editData.date);
+    }
 
   }
   addProduct(){
-   if(this.productForm.value)  
-   this.apiService.postProduct(this.productForm.value)
-   .subscribe({
-     next: res => {
-       alert("Product added successfully");
-       this.productForm.reset();
-       this.dialogRef.close('save');
-     },
-     error: () => alert("Error while added product")
-   });
+    if(!this.editData){
+      if(this.productForm.value)  
+      this.apiService.postProduct(this.productForm.value)
+      .subscribe({
+        next: res => {
+          alert("Product added successfully");
+          this.productForm.reset();
+          this.dialogRef.close('save');
+        },
+        error: () => alert("Error while added product")
+      });
+    } else {
+      this.updateProduct();
+    }
+  }
+
+  updateProduct(){
+    this.apiService.putProduct(this.productForm.value,this.editData.id)
+    .subscribe({
+      next: res => {
+        alert("Product updated successfully");
+        this.productForm.reset();
+        this.dialogRef.close('update');
+      },
+      error: () => alert("Error while updated product")
+    });;
   }
 
 }
